@@ -1,19 +1,38 @@
 import React from 'react'
+import { useState } from 'react';
+import axios from 'axios';
 import '../pages/styles/login.css';
 
-const login = () => {
+const Login = () => {
+
+  const [username, setusername] = useState({});
+  const [password, setpassword] = useState({});
+
+  const handleSubmit = async(e) =>{
+    e.preventDefault();
+    try {
+      const res = await axios.post('/api/auth/login', { username, password });
+      console.log(res.data);
+    } catch (err) {
+      console.error(err.response.data);
+    }
+
+  }
+
+
   return (
     <div>
       <div class="container">
         <div class="card">
           <h2>Login</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               id="username"
               name="username"
               placeholder="Username"
               required
+              onChange={(e)=>setusername(e.target.value)}
             />
             <input
               type="password"
@@ -21,6 +40,7 @@ const login = () => {
               name="password"
               placeholder="Password"
               required
+              onChange={(e)=>setpassword(e.target.value)}
             />
             <a href='/register'>New User?</a>
             <br/>
@@ -32,4 +52,4 @@ const login = () => {
   );
 }
 
-export default login
+export default Login

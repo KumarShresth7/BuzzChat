@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwtSecret = 'Shresth';
 
 const registerUser = async(req,res) =>{
-    const {email,name,password} = req.body;
+    const {email,username,password} = req.body;
 
     try {
         
@@ -13,7 +13,7 @@ const registerUser = async(req,res) =>{
             return res.status(400).json({msg:'user already exists'});
         }
 
-        user = new User({name,email,password});
+        user = new User({email,username,password});
 
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password,salt);

@@ -41,7 +41,7 @@ body {
     border-radius: 4px;
     transition: border-color 0.3s ease-in-out;
     outline: none;
-    color: #fff;
+    color: #2980b9;
   }
   
   input:focus {
