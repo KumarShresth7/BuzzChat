@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../pages/styles/login.css';
 
@@ -7,12 +8,16 @@ const Login = () => {
 
   const [username, setusername] = useState({});
   const [password, setpassword] = useState({});
+  const navigate = useNavigate();
 
   const handleSubmit = async(e) =>{
+    
     e.preventDefault();
     try {
-      const res = await axios.post('/api/auth/login', { username, password });
+      const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
       console.log(res.data);
+      navigate('/chat');
+      
     } catch (err) {
       console.error(err.response.data);
     }
