@@ -11,12 +11,12 @@ const chat = () => {
         <div class="navbar-brand">
             <a href="#">ChatApp</a>
         </div>
-        <ul class="navbar-menu">
+        {/* <ul class="navbar-menu">
             <li class="navbar-item"><a href="#">Home</a></li>
             <li class="navbar-item"><a href="#">Messages</a></li>
             <li class="navbar-item"><a href="#">Contacts</a></li>
             <li class="navbar-item"><a href="#">Settings</a></li>
-        </ul>
+        </ul> */}
         <div class="navbar-actions">
             <button class="navbar-button">Login</button>
             <button class="navbar-button">Sign Up</button>
