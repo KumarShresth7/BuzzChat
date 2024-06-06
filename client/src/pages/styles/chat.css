@@ -1,5 +1,5 @@
 .container-xl{
-    background-color: orange;
+    background: linear-gradient(135deg, #f06, #4a90e2);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,7 +24,7 @@
 
 .chat-header {
     padding: 15px;
-    background-color: #007bff;
+    background: linear-gradient(to right, #348f50, #56b4d3);
     color: #fff;
     text-align: center;
 }
@@ -92,10 +92,20 @@
 .user-list-container {
     height: 70vh;
     width: 83vh;
-    padding: 20px;
+    padding: 0px;
     border: 1px solid #ccc;
     /* border-radius: 8px; */
     background-color: #fff;
+}
+
+
+.user-header {
+    height: 10vh;
+    background: linear-gradient(to right, #fdc830, #f37335);
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 15px;
 }
 
 

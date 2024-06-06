@@ -11,7 +11,10 @@ const chat = () => {
     
         <div className="users">
         <div className="user-list-container">
-        <h2>Users</h2>
+          <div className="user-header">
+          <h2>Users</h2>
+          </div>
+        
         <ul class="user-list">
             <li class="user-item">
                 <img src={Shresth} alt="User 1" class="user-avatar"/>
