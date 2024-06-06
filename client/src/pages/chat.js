@@ -7,7 +7,22 @@ import Abhinandan from '../assets/abhinandan.png';
 const chat = () => {
   return (
     <div>
-      <div className="container-xl">
+      <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="#">ChatApp</a>
+        </div>
+        <ul class="navbar-menu">
+            <li class="navbar-item"><a href="#">Home</a></li>
+            <li class="navbar-item"><a href="#">Messages</a></li>
+            <li class="navbar-item"><a href="#">Contacts</a></li>
+            <li class="navbar-item"><a href="#">Settings</a></li>
+        </ul>
+        <div class="navbar-actions">
+            <button class="navbar-button">Login</button>
+            <button class="navbar-button">Sign Up</button>
+        </div>
+    </nav>
+      <div className="container-xxl">
     
         <div className="users">
         <div className="user-list-container">
