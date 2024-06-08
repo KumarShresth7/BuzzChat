@@ -1,10 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import io from 'socket.io-client';
 import '../pages/styles/chat.css';
 import Shresth from '../assets/me.png';
 import Vedant from '../assets/vedant.png';
 import Abhinandan from '../assets/abhinandan.png';
 
-const chat = () => {
+const socket = io('http://localhost:3001');
+
+const Chat = () => {
+
+    const [message, setmessage] = useState('');
+    const [messages, setmessages] = useState([]);
+
+
+    useEffect(() => {
+        socket.on('chat message', (msg) => {
+            setmessages((prevMessages) => [...prevMessages, msg]);
+        });
+
+        return () => {
+            socket.off('chat message');
+        };
+    }, []);
+
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        if(message){
+            socket.emit('chat message',message);
+            setmessage('');
+        }
+    }
+
+
+
+
+
   return (
     <div>
       <nav class="navbar">
@@ -53,17 +84,23 @@ const chat = () => {
             <h2>Chat</h2>
         </div>
         <div class="chat-messages">
-            <div class="message">
+            {/* <div class="message">
                 <div class="message-content">Hello, how are you?</div>
             </div>
             <div class="message user">
                 <div class="message-content">I'm good, thanks! How about you?</div>
-            </div>
+            </div> */}
+        <div>
+                {messages.map((msg, index) => (
+                    <li key={index}>{msg}</li>
+                ))}
         </div>
-        <div class="chat-input">
-            <input type="text" placeholder="Type a message..." />
-            <button>Send</button>
         </div>
+        
+        <form class="chat-input" onSubmit={handleSubmit}>
+            <input type="text" className='message-input' value={message} placeholder="Type a message..." onChange={(e)=>setmessage(e.target.value)} />
+            <button type='submit' className='send-button'>Send</button>
+        </form>
         </div>
 
       </div>
@@ -71,4 +108,4 @@ const chat = () => {
   )
 }
 
-export default chat
+export default Chat
