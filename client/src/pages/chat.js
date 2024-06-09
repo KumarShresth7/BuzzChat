@@ -11,23 +11,34 @@ const Chat = () => {
 
     const [message, setmessage] = useState('');
     const [messages, setmessages] = useState([]);
+    const [socketID, setsocketID] = useState('');
 
 
     useEffect(() => {
+
+        socket.on('connect', ()=>{
+            setsocketID(socket.id);
+        })
+
         socket.on('chat message', (msg) => {
-            setmessages((prevMessages) => [...prevMessages, msg]);
+            if(msg.id != socketID){
+                setmessages((prevMessages) => [...prevMessages,{ text: msg.text, sender: 'other' }]);
+            }
+            
         });
 
         return () => {
+            socket.off('connect');
             socket.off('chat message');
         };
-    }, []);
+    }, [socketID]);
 
 
     const handleSubmit = (e) =>{
         e.preventDefault();
         if(message){
-            socket.emit('chat message',message);
+            setmessages((prevMessages) => [...prevMessages, { text: message, sender: 'self' }]);
+            socket.emit('chat message', {text:message,id:socketID});
             setmessage('');
         }
     }
@@ -92,7 +103,11 @@ const Chat = () => {
             </div> */}
         <div>
                 {messages.map((msg, index) => (
-                    <li key={index}>{msg}</li>
+                    msg.sender === 'self' ?
+                    (<div className='message'><div key={index} className='message-content'>{msg.text}</div></div>)
+                    :
+                    (<div className='message user'><div key={index} className='message-content'>{msg.text}</div></div>)
+
                 ))}
         </div>
         </div>
