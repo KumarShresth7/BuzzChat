@@ -2,6 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const jwtSecret = 'Shresth';
+const Message = require('../models/Message');
 
 const registerUser = async(req,res) =>{
     const {email,username,password} = req.body;
@@ -43,7 +44,7 @@ const loginUser = async(req,res)=>{
 
     try {
 
-        let user = await    User.findOne({username});
+        let user = await User.findOne({username});
         if (!user) {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
@@ -70,14 +71,47 @@ const loginUser = async(req,res)=>{
 }
 
 
-const getAuthUser = async(req,res) =>{
-    try {
-        const user = await User.findById(req.user.id).select('-password');
-        res.json(user);
-      } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-      }
+    const getAuthUser = async(req,res) =>{
+        try {
+            const user = await User.findById(req.user.id).select('-password');
+            res.json(user);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server error');
+        }
+        }
+
+    const getUsers = async(req,res) =>{
+        try {
+            const users = await User.find();
+            res.json(users);
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-module.exports = {registerUser,loginUser,getAuthUser};
+    const getMessage = async(req,res) =>{
+        try {
+            const message = await Message.find({user:req.user.id}).populate('user','username');
+            res.json(message);  
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const postMessage = async(req,res)=>{
+        try {
+            const newMessage = new Message({
+                user:req.user.id,
+                text:req.body.text
+            }) 
+
+            const message = await newMessage.save();
+            res.json(message);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+module.exports = {registerUser,loginUser,getAuthUser,getUsers,getMessage,postMessage};

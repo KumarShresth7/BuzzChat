@@ -4,20 +4,53 @@ import '../pages/styles/chat.css';
 import Shresth from '../assets/me.png';
 import Vedant from '../assets/vedant.png';
 import Abhinandan from '../assets/abhinandan.png';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const socket = io('http://localhost:3001');
 
 const Chat = () => {
 
+    const [user, setuser] = useState('');
+    const [users, setusers] = useState([]);
     const [message, setmessage] = useState('');
     const [messages, setmessages] = useState([]);
     const [socketID, setsocketID] = useState('');
+    const navigate = useNavigate();
+    // const [room, setroom] = useState('');
 
 
     useEffect(() => {
 
+        const fetchUser = async() =>{
+            try {
+                const token = localStorage.getItem('token');
+                if(!token){
+                    navigate('/');
+                    return;
+                }
+    
+                const config = {
+                    headers:{
+                        'Content-Type':'application/json',
+                        'auth-token': token
+                    }  
+                }
+
+                const res = await axios.get('http://localhost:5000/api/auth/me',config);
+                setuser(res.data);
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+
+        fetchUser();
+
         socket.on('connect', ()=>{
             setsocketID(socket.id);
+            console.log('Connected',socket.id);
         })
 
         socket.on('chat message', (msg) => {
@@ -31,6 +64,8 @@ const Chat = () => {
             socket.off('connect');
             socket.off('chat message');
         };
+
+       
     }, [socketID]);
 
 
@@ -60,8 +95,9 @@ const Chat = () => {
             <li class="navbar-item"><a href="#">Settings</a></li>
         </ul> */}
         <div class="navbar-actions">
-            <button class="navbar-button">Login</button>
-            <button class="navbar-button">Sign Up</button>
+            Hi,{user.username}
+            {/* <button class="navbar-button">Login</button>
+            <button class="navbar-button">Sign Up</button> */}
         </div>
     </nav>
       <div className="container-xxl">

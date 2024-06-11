@@ -10,12 +10,14 @@ const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
         origin: "http://localhost:3000",
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST"],
+        credentials: true
     }
 });
 
 io.on('connection', (socket) => {
     console.log('a user connected');
+    console.log('ID',socket.id)
     
     socket.on('chat message', (msg) => {
 
