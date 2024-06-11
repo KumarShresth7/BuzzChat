@@ -17,12 +17,13 @@ const Chat = () => {
     const [messages, setmessages] = useState([]);
     const [socketID, setsocketID] = useState('');
     const navigate = useNavigate();
+    const [messages1, setmessages1] = useState([]);
     // const [room, setroom] = useState('');
 
 
     useEffect(() => {
 
-        const fetchUser = async() =>{
+        const fetchData = async() =>{
             try {
                 const token = localStorage.getItem('token');
                 if(!token){
@@ -40,13 +41,19 @@ const Chat = () => {
                 const res = await axios.get('http://localhost:5000/api/auth/me',config);
                 setuser(res.data);
 
+                const usersResponse = await axios.get('http://localhost:5000/api/auth/users',config);
+                setusers(usersResponse.data);
+
+                const messageResponse = await axios.get('http://localhost:5000/api/auth/messages',config);
+                setmessage(messageResponse.data);
+
             } catch (error) {
                 console.log(error);
             }
         }
 
 
-        fetchUser();
+        fetchData();
 
         socket.on('connect', ()=>{
             setsocketID(socket.id);
@@ -66,16 +73,26 @@ const Chat = () => {
         };
 
        
-    }, [socketID]);
+    }, [navigate]);
 
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async(e) =>{
         e.preventDefault();
-        if(message){
-            setmessages((prevMessages) => [...prevMessages, { text: message, sender: 'self' }]);
-            socket.emit('chat message', {text:message,id:socketID});
-            setmessage('');
+        try {
+            const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': token,
         }
+    }
+       const res = await axios.post('http://localhost:5000/api/auth/messages', { text: message }, config);
+       setmessages([...message,{ text: message, sender: 'self' },res.data]);
+       setmessage('');
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
 
@@ -109,7 +126,13 @@ const Chat = () => {
           </div>
         
         <ul class="user-list">
-            <li class="user-item">
+             {users.map((u) => (
+                <li key={u._id} className="user-item">
+                  <img src={u.avatar} alt={u.username} className="user-avatar" />
+                  <span className="user-name">{u.username}</span>
+                </li>
+              ))}
+            {/* <li class="user-item">
                 <img src={Shresth} alt="User 1" class="user-avatar"/>
                 <span class="user-name">Shresth</span>
             </li>
@@ -120,7 +143,7 @@ const Chat = () => {
             <li class="user-item">
                 <img src={Abhinandan} alt="User 3" class="user-avatar"/>
                 <span class="user-name">Abhinandan</span>
-            </li>
+            </li> */}
         </ul>
 
         </div>
