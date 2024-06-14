@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import io from 'socket.io-client';
 import '../pages/styles/chat.css';
 import Shresth from '../assets/me.png';
@@ -6,8 +6,11 @@ import Vedant from '../assets/vedant.png';
 import Abhinandan from '../assets/abhinandan.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/userContext';
 
 const socket = io('http://localhost:3001');
+
+
 
 const Chat = () => {
 
@@ -19,6 +22,7 @@ const Chat = () => {
     const navigate = useNavigate();
     const [messages1, setmessages1] = useState([]);
     // const [room, setroom] = useState('');
+    const {user:temp} = useContext(UserContext)
 
 
     useEffect(() => {
@@ -112,7 +116,7 @@ const Chat = () => {
             <li class="navbar-item"><a href="#">Settings</a></li>
         </ul> */}
         <div class="navbar-actions">
-            Hi,{user.username}
+            Hi,{temp?.username}
             {/* <button class="navbar-button">Login</button>
             <button class="navbar-button">Sign Up</button> */}
         </div>
