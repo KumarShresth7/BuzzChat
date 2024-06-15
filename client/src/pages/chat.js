@@ -75,7 +75,7 @@ const Chat = () => {
         };
 
        
-    }, [navigate,setUser,socketID]);
+    }, [navigate,setUser,socketID,messages]);
 
 
     const handleSubmit = async(e) =>{
