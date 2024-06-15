@@ -2,7 +2,6 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const jwtSecret = 'Shresth';
-const Message = require('../models/Message');
 
 const registerUser = async(req,res) =>{
     const {email,username,password} = req.body;
@@ -83,35 +82,14 @@ const loginUser = async(req,res)=>{
 
     const getUsers = async(req,res) =>{
         try {
-            const users = await User.find().select('username');
+            const users = await User.find();
             res.json(users);
         } catch (error) {
             console.log(error)
         }
     }
 
-    const getMessage = async(req,res) =>{
-        try {
-            const message = await Message.find({user:req.user.id}).populate('user','username');
-            res.json(message);  
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const postMessage = async(req,res)=>{
-        try {
-            const newMessage = new Message({
-                user:req.user.id,
-                text:req.body.text
-            }) 
-
-            const message = await newMessage.save();
-            res.json(message);
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
 
-module.exports = {registerUser,loginUser,getAuthUser,getUsers,getMessage,postMessage};
+
+module.exports = {registerUser,loginUser,getAuthUser,getUsers};
