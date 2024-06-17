@@ -76,6 +76,7 @@
     background-color: green;
     flex: 1;
     height: 88vh;
+    width: 80vh;
     border-radius: 5px;
 }
 
@@ -150,7 +151,7 @@
 
 .user-list-container {
     height: 88vh;
-    width: 83vh;
+    width: 80vh;
     padding: 0px;
     border: 1px solid #ccc;
     /* border-radius: 8px; */

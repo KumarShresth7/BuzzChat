@@ -1,64 +1,82 @@
-body {
-    font-family: "Roboto", sans-serif;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #111;
-    color: #fff;
-  }
-  
-  .container {
-    width: 100%;
-    max-width: 400px;
-    padding: 0 20px;
-    box-sizing: border-box;
-  }
-  
-  .card {
-    width: 100%;
-    background-color: #333;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-  }
-  
-  h2 {
-    text-align: center;
-    color: #fff;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  input {
-    padding: 10px;
-    margin-bottom: 12px;
-    border: 1px solid #555;
-    border-radius: 4px;
-    transition: border-color 0.3s ease-in-out;
-    outline: none;
-    color: #2980b9;
-  }
-  
-  input:focus {
-    border-color: #3498db;
-  }
-  
-  button {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  button:hover {
-    background-color: #2980b9;
-  }
-  
+/* General reset for the registration page */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Flex container styles */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Container styles */
+.register-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Card styles */
+.register-card h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input styles */
+.register-card input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.register-card input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0,123,255,0.2);
+}
+
+/* Button styles */
+.register-card button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Link styles */
+.register-card a {
+  color: #007bff;
+  text-decoration: none;
+  display: block;
+  margin: 10px 0;
+}
+
+.register-card a:hover {
+  text-decoration: underline;
+}
