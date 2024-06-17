@@ -116,7 +116,7 @@ const Chat = () => {
     <div>
       <nav class="navbar">
         <div class="navbar-brand">
-            <a href="#">ChatApp</a>
+            <a href="#">BuzzChat</a>
         </div>
         {/* <ul class="navbar-menu">
             <li class="navbar-item"><a href="#">Home</a></li>
