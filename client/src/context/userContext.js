@@ -17,7 +17,7 @@ export function UserContextProvider({ children }) {
     }
 
       if (token) {
-        axios.get('http://localhost:5000/api/auth/me',config)
+        axios.get('https://buzz-chat-api.vercel.app/api/auth/me',config)
         .then(({ data }) => {
             console.log(data)
           setUser(data);
