@@ -14,25 +14,19 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "https://buzz-chat-frontend-six.vercel.app",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization", "auth-token", "my-custom-header"],
-    credentials: true
+    origin: " http://localhost:3000",
+    methods: ['GET', 'POST'], // Methods allowed for CORS requests
+    allowedHeaders: ['Content-Type', 'Authorization'],
   }
 });
 
 // Apply CORS middleware
-app.use(cors({
-  origin: 'https://buzz-chat-frontend-six.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'auth-token', 'my-custom-header'],
-  credentials: true
-}));
+app.use(cors());
 
 app.use(express.json());
 
 // Handle CORS preflight requests
-app.options('*', cors());
+// app.options('*', cors());
 
 
 // Connect to MongoDB
@@ -52,9 +46,9 @@ io.on('connection', (socket) => {
 });
 
 // Routes
-app.use("/",(req,res)=>{
-  res.json({message:"Hello from Express App"})
-})
+// app.use("/",(req,res)=>{
+//   res.json({message:"Hello from Express App"})
+// })
 
 app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);

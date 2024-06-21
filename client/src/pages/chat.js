@@ -5,17 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/userContext';
 
-const socket = io('https://buzz-chat-api.vercel.app', {
-  withCredentials: true,
-  transportOptions: {
-    polling: {
-      extraHeaders: {
-        "Authorization": localStorage.getItem('token'), // Assuming you use a token for auth
-        "my-custom-header": "abcd" // Custom header if needed
-      }
-    }
-  }
-});
+const socket = io('http://localhost:5000');
 
 const Chat = () => {
   const [users, setUsers] = useState([]);
@@ -42,13 +32,13 @@ const Chat = () => {
           }
         };
 
-        const res = await axios.get('https://buzz-chat-api.vercel.app/api/auth/me', config);
+        const res = await axios.get('http://localhost:5000/api/auth/me', config);
         setUser(res.data);
 
-        const usersResponse = await axios.get('https://buzz-chat-api.vercel.app/api/auth/users', config);
+        const usersResponse = await axios.get('http://localhost:5000/api/auth/users', config);
         setUsers(Array.isArray(usersResponse.data) ? usersResponse.data : []);
 
-        const messageResponse = await axios.get('https://buzz-chat-api.vercel.app/api/messages', config);
+        const messageResponse = await axios.get('http://localhost:5000/api/messages', config);
         setMessages(Array.isArray(messageResponse.data) ? messageResponse.data : []);
       } catch (error) {
         console.log(error);
@@ -92,7 +82,7 @@ const Chat = () => {
         return;
       }
 
-      const res = await axios.post('https://buzz-chat-api.vercel.app/api/messages', {
+      const res = await axios.post('http://localhost:5000/api/messages', {
         text: message,
         receiverId: selectedUser._id,
         senderId

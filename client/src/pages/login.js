@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://buzz-chat-api.vercel.app/api/auth/login', { username, password });
+      const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
       console.log(res.data);
       console.log(res.data.token)
       localStorage.setItem('token', res.data.token);

@@ -11,7 +11,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://buzz-chat-api.vercel.app/api/auth/register', { email, username, password });
+      const res = await axios.post('http://localhost:5000/api/auth/register', { email, username, password });
       console.log(res.data);
     } catch (err) {
       console.error(err.response.data);
