@@ -15,9 +15,18 @@ const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
     origin: "https://buzz-chat-frontend-six.vercel.app",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    handlePreflightRequest: (req, res) => {
+      res.writeHead(200, {
+        "Access-Control-Allow-Origin": "https://example.com",
+        "Access-Control-Allow-Methods": "GET,POST",
+        "Access-Control-Allow-Headers": "my-custom-header",
+        "Access-Control-Allow-Credentials": true
+      });
+      res.end();
+    },
+    // methods: ["GET", "POST"],
+    // allowedHeaders: ["Content-Type", "Authorization"],
+    // credentials: true,
   }
 });
 
@@ -35,11 +44,6 @@ app.use(express.json());
 // Handle CORS preflight requests
 app.options('*', cors());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://buzz-chat-frontend-six.vercel.app');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
