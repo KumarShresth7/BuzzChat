@@ -15,18 +15,9 @@ const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
     origin: "https://buzz-chat-frontend-six.vercel.app",
-    handlePreflightRequest: (req, res) => {
-      res.writeHead(200, {
-        "Access-Control-Allow-Origin": "https://buzz-chat-frontend-six.vercel.app",
-        "Access-Control-Allow-Methods": "GET,POST",
-        "Access-Control-Allow-Headers": ["Content-Type", "Authorization"],
-        "Access-Control-Allow-Credentials": true
-      });
-      res.end();
-    },
-    // methods: ["GET", "POST"],
-    // allowedHeaders: ["Content-Type", "Authorization"],
-    // credentials: true,
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization", "auth-token", "my-custom-header"],
+    credentials: true
   }
 });
 
@@ -34,9 +25,8 @@ const io = socketIo(server, {
 app.use(cors({
   origin: 'https://buzz-chat-frontend-six.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  optionSuccessStatus:200
+  allowedHeaders: ['Content-Type', 'Authorization', 'auth-token', 'my-custom-header'],
+  credentials: true
 }));
 
 app.use(express.json());

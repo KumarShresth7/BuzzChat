@@ -13,6 +13,7 @@ const socket = io('https://buzz-chat-api.vercel.app', {
     transportOptions: {
       polling: {
         extraHeaders: {
+        "Authorization": localStorage.getItem('token'),
           "my-custom-header": "abcd"
         }
       }
