@@ -27,7 +27,7 @@ app.use(cors({
 
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect('mongodb+srv://kumarshresth2004:Shresth%40123@cluster0.lly1dz4.mongodb.net/chatapp');
 
 io.on('connection', (socket) => {
   console.log('New client connected');
