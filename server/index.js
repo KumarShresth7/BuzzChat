@@ -17,7 +17,7 @@ const io = socketIo(server, {
     origin: "https://buzz-chat-frontend-six.vercel.app",
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
+    credentials: true,
   }
 });
 
@@ -26,7 +26,8 @@ app.use(cors({
   origin: 'https://buzz-chat-frontend-six.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,
+  optionSuccessStatus:200
 }));
 
 app.use(express.json());
