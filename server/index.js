@@ -62,6 +62,9 @@ io.on('connection', (socket) => {
 });
 
 // Routes
+app.use("/",(req,res)=>{
+  res.json({message:"Hello from Express App"})
+})
 app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 
