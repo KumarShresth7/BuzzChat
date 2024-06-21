@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import './styles/chat.css'
+import '../pages/styles/chat.css'
 import io from 'socket.io-client';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
