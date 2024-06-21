@@ -40,13 +40,13 @@ const Chat = () => {
                     }  
                 }
 
-                const res = await axios.get('http://localhost:5000/api/auth/me',config);
+                const res = await axios.get('https://buzz-chat-api.vercel.app/api/auth/me',config);
                 setUser(res.data);
 
-                const usersResponse = await axios.get('http://localhost:5000/api/auth/users',config);
+                const usersResponse = await axios.get('https://buzz-chat-api.vercel.app/api/auth/users',config);
                 setUsers(usersResponse.data);
 
-                const messageResponse = await axios.get('http://localhost:5000/api/messages',config);
+                const messageResponse = await axios.get('https://buzz-chat-api.vercel.app/api/messages',config);
                 setMessages(messageResponse.data);
 
             } catch (error) {
@@ -97,7 +97,7 @@ const Chat = () => {
         return;
       }
     
-       const res = await axios.post('http://localhost:5000/api/messages', { text:message,receiverId:selectedUser._id,senderId}, config);
+       const res = await axios.post('https://buzz-chat-api.vercel.app/api/messages', { text:message,receiverId:selectedUser._id,senderId}, config);
        setMessages([...messages, { text: message, sender: 'self' },res.data]);
        setMessage('');
 
