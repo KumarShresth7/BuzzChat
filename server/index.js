@@ -12,14 +12,14 @@ const messageRoutes = require('./routes/messagesRoutes.js');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server, {
-  cors: {
-    origin: "https://buzz-chat-frontend-six.vercel.app",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  }
-});
+// const io = socketIo(server, {
+//   cors: {
+//     origin: "https://buzz-chat-frontend-six.vercel.app",
+//     methods: ["GET", "POST"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     credentials: true,
+//   }
+// });
 
 // Apply CORS middleware
 app.use(cors({
