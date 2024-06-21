@@ -13,13 +13,14 @@ export function UserContextProvider({ children }) {
         headers:{
             'Content-Type':'application/json',
             'auth-token': token
-        }  
+        },
+        withCredentials:true  
     }
 
       if (token) {
         axios.get('https://buzz-chat-api.vercel.app/api/auth/me',config)
         .then(({ data }) => {
-            console.log(data)
+          console.log(data)
           setUser(data);
         })
         .catch((error) => {
