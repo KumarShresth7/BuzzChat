@@ -19,7 +19,12 @@ const io = socketIo(server, {
   }
 });
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://buzz-chat-frontend-six.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI);
