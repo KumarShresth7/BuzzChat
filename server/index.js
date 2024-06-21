@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "https://buzz-chat-frontend-six.vercel.app",
+    origin: "https://buzz-chat-frontend-six.vercel.app/",
     methods: ["GET", "POST"]
   }
 });
