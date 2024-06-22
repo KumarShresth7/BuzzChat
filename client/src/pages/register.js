@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import '../pages/styles/register.css'; // Make sure to import the CSS file
+import { baseUrl } from '../baseUrl';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', { email, username, password });
+      const res = await axios.post(`${baseUrl}/api/auth/register`, { email, username, password });
       console.log(res.data);
     } catch (err) {
       console.error(err.response.data);

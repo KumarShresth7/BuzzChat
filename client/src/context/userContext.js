@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createContext, useState, useEffect } from 'react';
+import { baseUrl } from '../baseUrl';
 
 export const UserContext = createContext({});
 
@@ -17,7 +18,7 @@ export function UserContextProvider({ children }) {
     }
 
       if (token) {
-        axios.get('http://localhost:5000/api/auth/me',config)
+        axios.get(`${baseUrl}/api/auth/me`,config)
         .then(({ data }) => {
           console.log(data)
           setUser(data);
