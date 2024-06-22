@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../pages/styles/login.css'; // Make sure to import the CSS file
+import { baseUrl } from '../baseUrl';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -12,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
+      const res = await axios.post(`${baseUrl}/api/auth/login`, { username, password });
       console.log(res.data);
       console.log(res.data.token)
       localStorage.setItem('token', res.data.token);
