@@ -1,10 +1,3 @@
-/* Reset default margin and padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 /* Global styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -124,7 +117,7 @@ body {
 .chat-messages {
     background-color: #ffffff;
     padding: 15px;
-    height: calc(90vh - 150px); /* Adjust for navbar and header heights */
+    height: calc(100vh - 150px); /* Adjust for navbar and header heights */
     overflow-y: auto;
     border-radius: 0 0 8px 8px;
 }
@@ -182,4 +175,36 @@ body {
 
 .send-button:hover {
     background-color: #0056b3;
+}
+
+/* Media query for max width 400px */
+@media (max-width: 400px) {
+    .container-xxl {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .users {
+        flex: none;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .chats {
+        flex: none;
+        margin-left: 0;
+    }
+
+    .user-list-container {
+        height: auto;
+        max-height: 50vh; /* Limit height on smaller screens */
+    }
+
+    .chat-messages {
+        height: 50vh; /* Limit height on smaller screens */
+    }
+
+    .message-content {
+        max-width: 100%; /* Full width on smaller screens */
+    }
 }
