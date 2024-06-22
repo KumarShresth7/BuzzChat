@@ -177,8 +177,8 @@ body {
     background-color: #0056b3;
 }
 
-/* Media query for max width 400px */
-@media (max-width: 400px) {
+/* Media query for max width 600px */
+@media (max-width: 600px) {
     .container-xxl {
         flex-direction: column;
         align-items: stretch;
@@ -206,5 +206,13 @@ body {
 
     .message-content {
         max-width: 100%; /* Full width on smaller screens */
+    }
+
+    .navbar-brand a {
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }
+
+    .navbar-actions {
+        display: none; /* Hide actions in navbar on smaller screens */
     }
 }
