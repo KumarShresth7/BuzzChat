@@ -1,0 +1,1 @@
+export const baseUrl = 'https://buzzchat-10.onrender.com'
